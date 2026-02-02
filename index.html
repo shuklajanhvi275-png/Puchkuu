@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Puchkuu 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #ffe6f0, #fff);
+    color: #333;
+    overflow-x: hidden;
+}
+
+section {
+    padding: 40px 20px;
+    text-align: center;
+    animation: slideUp 1s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
+    color: #ff4d88;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 900px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+button {
+    background: #ff4d88;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    margin: 5px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+/* PHOTO GALLERY */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery img {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    border-radius: 18px;
+    margin: 10px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+/* FLOATING HEARTS */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 22px;
+    animation: floatUp 6s linear infinite;
+    cursor: pointer;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* FIREWORKS */
+.firework {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(5); opacity: 0; }
+}
+
+footer {
+    background: #ffb3cc;
+    padding: 20px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio autoplay loop>
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<section>
+    <h1>Hey My Puchkuu 💖</h1>
+    <div class="card">
+        <p>
+            This little corner of the internet exists only for you 🥹💞  
+            Made with love, smiles, and a whole lot of *us* 🌸
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>Our Memories 📸</h2>
+    <div class="card gallery">
+        <img src="photo1.jpg" alt="Our memory 1">
+        <img src="photo2.jpg" alt="Our memory 2">
+        <img src="photo3.jpg" alt="Our memory 3">
+        <p style="width:100%; margin-top:15px;">
+            Every picture holds a thousand feelings 💗
+        </p>
+    </div>
+</section>
+
+<section>
+    <h2>Secret Page 🔒💞</h2>
+    <div class="card">
+        <p><b>Password Hint:</b><br>
+        “The name you smile at when I call you, the softest word my heart knows 🥹💗”
+        </p>
+
+        <input type="password" id="password" placeholder="Enter password 💖">
+        <br><br>
+        <button onclick="unlock()">Unlock 💌</button>
+        <p id="error" style="color:#ff4d88;"></p>
+    </div>
+</section>
+
+<section id="secrets" style="display:none;">
+    <h2>Just Between Us 💕</h2>
+
+    <div class="card" id="secretText">
+        You are my calm, my chaos, and my forever 🥹💖
+    </div>
+
+    <button onclick="changeSecret(0)">Page 1</button>
+    <button onclick="changeSecret(1)">Page 2</button>
+    <button onclick="changeSecret(2)">Page 3</button>
+</section>
+
+<footer>
+    Made with endless love 💖
+</footer>
+
+<script>
+const secrets = [
+    "You are my calm, my chaos, and my forever 🥹💖",
+    "If love had a name, it would be puchkuu 😘",
+    "No matter what, my heart chooses you every time 💍"
+];
+
+function unlock() {
+    const pass = document.getElementById("password").value;
+    if (pass === "puchkuu") {
+        document.getElementById("secrets").style.display = "block";
+        document.getElementById("error").innerText = "";
+        fireworks();
+    } else {
+        document.getElementById("error").innerText =
+            "Not yet… try the name I call you the most 🥹💗";
+    }
+}
+
+function changeSecret(i) {
+    document.getElementById("secretText").innerText = secrets[i];
+}
+
+/* FIREWORKS */
+function fireworks() {
+    for (let i = 0; i < 35; i++) {
+        const fw = document.createElement("div");
+        fw.className = "firework";
+        fw.style.left = Math.random() * 100 + "vw";
+        fw.style.top = Math.random() * 100 + "vh";
+        fw.style.background =
+            ["#ff4d88", "#ffd1dc", "#ff99cc"][Math.floor(Math.random()*3)];
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1000);
+    }
+}
+
+/* CLICKABLE HEARTS */
+const heartMessages = [
+    "I love you puchkuu 💖",
+    "You are my favorite human 😭",
+    "Forever looks good with you 💍",
+    "My heart feels safe with you 🤍"
+];
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.onclick = () => {
+        alert(heartMessages[Math.floor(Math.random() * heartMessages.length)]);
+        heart.remove();
+    };
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 600);
+</script>
+
+</body>
+</html>
